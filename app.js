@@ -3,7 +3,9 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 const connectedDB = require("./database/database");
 const cors = require("cors");
+
 const productRoutes = require("./Routes/productRoutes");
+const categoryRoutes = require("./Routes/categoryRoutes");
 
 const app = express();
 app.use(express.json());
@@ -14,6 +16,7 @@ mongoose.connect(process.env.DATABASE_CONNECTION_STRING, {
 });
 
 app.use("/api/products", productRoutes);
+app.use("/api/categories", categoryRoutes);
 
 const PORT = process.env.PORT || 8000;
 
