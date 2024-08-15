@@ -24,6 +24,7 @@ const getProductById = async (req, res) => {
 };
 
 const createProduct = async (req, res) => {
+  console.log(req.body);
   try {
     const product = new Product(req.body);
     await product.save();
