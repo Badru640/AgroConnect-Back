@@ -20,6 +20,6 @@ app.use("/api/categories", categoryRoutes);
 
 const PORT = process.env.PORT || 8000;
 
-app.listen(3036, () => {
+app.listen(3035, () => {
   console.log(`Server is running on port localhost:${PORT}`);
 });
