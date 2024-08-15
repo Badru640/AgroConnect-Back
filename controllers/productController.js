@@ -1,12 +1,30 @@
 const Product = require("../models/product");
+const Category = require("../models/category");
 
 const getProducts = async (req, res) => {
   try {
     const products = await Product.find();
-    console.log(products);
-    res.status(200).json(products);
+    const cenas = await Promise.all(
+      products.map(async (p) => {
+        const cId = p.category
+
+        if (!cId) return p
+        const category = await Category.findById(cId)
+        console.log(category)
+        return {
+          _id: p._id,
+          name: p.name,
+          description: p.description,
+          price: p.price,
+          imagem: p.imagem,
+          createdAt: p.createdAt,
+          category: category,
+        }
+      })
+    )
+    res.status(200).json(cenas);
   } catch (error) {
-    console.log(erro);
+    console.log(error);
     res.status(500).json({ error: "Failed to fetch products" });
   }
 };
